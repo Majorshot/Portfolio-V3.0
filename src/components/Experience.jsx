@@ -17,7 +17,7 @@ export const Experience = () => {
     { company: "M KINS", role: "Software Manager", period: "Jan 2024 — Feb 2025", color: "bg-zinc-600", desc: "Led software development initiatives, managed technical teams, and oversaw project delivery." },
     { company: "KERALA FINANCIAL CORP", role: "Backend Developer", period: "Mar 2025 — May 2025", color: "bg-emerald-600", desc: "Engineered secure backend services and API endpoints for financial infrastructure." },
     { company: "YANTURA", role: "React Developer", period: "Aug 2025 — Sept 2025", color: "bg-purple-600", desc: "Built dynamic, component-driven user interfaces using modern React methodologies." },
-    { company: "CENTURION STAUNCH", role: "WordPress & HTML Developer", period: "Nov 2025 — Present", color: "bg-orange-600", desc: "Developing and maintaining custom WordPress solutions and responsive HTML architecture." }
+    { company: "CENTURION STAUNCH", role: "WordPress & Javascript Developer", period: "Nov 2025 — Present", color: "bg-orange-600", desc: "Developing and maintaining custom WordPress solutions and responsive HTML architecture." }
   ];
 
   useEffect(() => {
