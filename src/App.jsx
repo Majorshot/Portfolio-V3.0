@@ -221,7 +221,6 @@ export default function App() {
                 { label: 'Services', ariaLabel: 'What I do', link: '#services' },
                 { label: 'Experience', ariaLabel: 'My timeline', link: '#experience' },
                 { label: 'Projects', ariaLabel: 'My work', link: '#projects' },
-                { label: 'Photography', ariaLabel: 'My lens archive', link: '#photography' },
                 { label: 'Contact', ariaLabel: 'Get in touch', link: '#contact' }
               ]}
               socialItems={[
