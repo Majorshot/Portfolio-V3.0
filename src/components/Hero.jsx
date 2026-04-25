@@ -133,7 +133,7 @@ export const Hero = ({ introFinished, theme, introVideoRef, bgVideoRef, heroText
 
           <div className={`flex-shrink-0 transition-all duration-1000 delay-[800ms] transform ${introFinished ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <a 
-              href="#" 
+              href="/resume.html" 
               target="_blank" 
               rel="noopener noreferrer"
               className="group relative inline-flex items-center justify-center px-8 py-3 md:py-4 text-xs md:text-sm font-bold font-mono tracking-[0.2em] text-zinc-900 dark:text-white border border-zinc-900 dark:border-white overflow-hidden transition-all duration-300 hover:border-orange-500 dark:hover:border-orange-500 w-fit"

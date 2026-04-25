@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midhun Mohan - Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #09090b;
+            --accent: #f97316;
+            --text-main: #27272a;
+            --text-muted: #71717a;
+            --bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f4f4f5;
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 40px 20px;
+        }
+
+        .resume-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--bg);
+            padding: 60px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-top: 8px solid var(--accent);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e4e4e7;
+            padding-bottom: 30px;
+        }
+
+        .header-left h1 {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            line-height: 0.9;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .header-left p {
+            font-size: 18px;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .header-right {
+            text-align: right;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .header-right a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .header-right a:hover {
+            color: var(--accent);
+        }
+
+        section {
+            margin-bottom: 35px;
+        }
+
+        h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            margin-bottom: 20px;
+            border-left: 3px solid var(--accent);
+            padding-left: 12px;
+            font-weight: 800;
+        }
+
+        .summary {
+            font-size: 16px;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .skill-category h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .skill-category p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .experience-item {
+            margin-bottom: 25px;
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .exp-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .exp-header span {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .exp-role {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 15px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-item li {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .experience-item li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .project-item {
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 4px;
+        }
+
+        .project-item h3 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .project-item p {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .education-item {
+            margin-bottom: 15px;
+        }
+
+        .education-item h3 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .education-item p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background-color: white;
+            }
+            .resume-container {
+                box-shadow: none;
+                margin: 0;
+                max-width: 100%;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        .no-print {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-print {
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-print:hover {
+            background: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <header>
+            <div class="header-left">
+                <h1>Midhun Mohan</h1>
+                <p>Web Developer // MERN & JS Expert</p>
+            </div>
+            <div class="header-right">
+                <p>midhunmohankzhyw@gmail.com</p>
+                <p>+91 999 58 55 774</p>
+                <p><a href="https://linkedin.com/in/midhunmohan-dev/">linkedin.com/in/midhunmohan-dev/</a></p>
+                <p><a href="https://github.com/Majorshot">github.com/Majorshot</a></p>
+            </div>
+        </header>
+
+        <section>
+            <h2>Summary</h2>
+            <p class="summary">
+                Multi-disciplinary developer architecting robust digital identities. Specialist in the MERN stack and high-performance JavaScript applications, with a proven track record of delivering scalable architectures and visceral user interfaces.
+            </p>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+            <div class="grid">
+                <div class="skill-category">
+                    <h3>Engineering</h3>
+                    <p>React.js, Node.js, Express, MongoDB, PHP, JS (ES6+), HTML5, CSS3</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Design & Motion</h3>
+                    <p>GSAP, Framer Motion, Tailwind CSS, UI/UX (Figma), Premiere Pro</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <div class="exp-header">
+                    <h3>Centurion Staunch</h3>
+                    <span>Nov 2025 – Present</span>
+                </div>
+                <span class="exp-role">WordPress & JavaScript Developer</span>
+                <ul>
+                    <li>Architecting bespoke digital solutions for healthcare and enterprise clients.</li>
+                    <li>Implementing high-fidelity motion systems using GSAP and modern JS.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <h3>Yantura</h3>
+                    <span>Aug 2025 – Sept 2025</span>
+                </div>
+                <span class="exp-role">React Developer</span>
+                <ul>
+                    <li>Engineered dynamic, component-driven interfaces for complex web applications.</li>
+                    <li>Optimized front-end performance and state management logic.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-header">
+                    <h3>Kerala Financial Corp</h3>
+                    <span>Mar 2025 – May 2025</span>
+                </div>
+                <span class="exp-role">Backend Developer</span>
+                <ul>
+                    <li>Developed secure backend infrastructure and encrypted API protocols.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>Diploma in MERN Stack</h3>
+                <p>Unique Occasio Tech | Ernakulam, Kerala (March 2025)</p>
+            </div>
+            <div class="education-item">
+                <h3>B.Sc. in Computer Science</h3>
+                <p>St. Thomas College | Kozhencherry, Kerala (March 2023)</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Featured Work</h2>
+            <div class="projects-grid">
+                <div class="project-item">
+                    <h3>Centurion Staunch Nexus</h3>
+                    <p>Event Management & Award Platform</p>
+                </div>
+                <div class="project-item">
+                    <h3>Centurion Staunch Ashbourne</h3>
+                    <p>Healthcare & Physiotherapy Portal</p>
+                </div>
+                <div class="project-item">
+                    <h3>GoRental</h3>
+                    <p>Car Rental Architecture</p>
+                </div>
+                <div class="project-item">
+                    <h3>Precripto</h3>
+                    <p>Doctors Appointment System</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="no-print">
+        <button class="btn-print" onclick="window.print()">SAVE AS PDF</button>
+    </div>
+</body>
+</html>
