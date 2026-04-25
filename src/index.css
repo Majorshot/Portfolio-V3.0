@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@media (pointer: fine) {
+  * { cursor: none !important; }
+}
+
+/* The rest of your CSS (noise, scanlines, etc.) goes below this! */
+
+body { margin: 0; background: #000; }
+
+.noise-bg {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.scanlines {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 51;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.4) 51%);
+  background-size: 100% 4px;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #555; border-radius: 4px; }
+.dark ::-webkit-scrollbar-thumb { background: #333; }
+
+.text-texture-dark {
+  background: linear-gradient(110deg, #fff 10%, #555 30%, #fff 50%, #555 70%, #fff 90%);
+  background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 8s linear infinite;
+}
+
+.text-texture-light {
+  background: linear-gradient(110deg, #111 10%, #444 30%, #111 50%, #444 70%, #111 90%);
+  background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 8s linear infinite;
+}
+
+@keyframes shine { to { background-position: 200% center; } }
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.animate-marquee { display: inline-flex; white-space: nowrap; animation: marquee 20s linear infinite; }
+.text-outline-dark { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); }
+.text-outline-light { color: transparent; -webkit-text-stroke: 1px rgba(0,0,0,0.8); }
+
+/* Audio Reactive Physics 
+   TUNE THE TEXT ZOOM HERE: Change 0.1 to a bigger/smaller number to increase/decrease snare bounce */
+.audio-reactive-hero {
+  transform: scale(calc(1 + (var(--treble-hit, 0) * 0.1)));
+  transition: transform 0.05s ease-out;
+  will-change: transform;
+}
+
+/* Playful Animations added for About Section */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+  animation: blob 8s infinite ease-in-out;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+.hover-playful {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.hover-playful:hover {
+  transform: translateY(-8px) scale(1.05) rotate(2deg);
+}
+.tilt-card-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.1s;
+}
+
+/* ═══════ SECTION DIVIDER ═══════ */
+.section-divider {
+  position: relative;
+  height: 120px;
+  width: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+.section-divider::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--divider-from, transparent), var(--divider-to, transparent));
+}
+
+/* ═══════ FOOTER CTA UNDERLINE ═══════ */
+.cta-underline {
+  position: relative;
+  display: inline-block;
+}
+.cta-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #f97316, #fb923c, #f97316);
+  border-radius: 2px;
+  transition: width 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+}
+.cta-underline:hover::after {
+  width: 100%;
+}
+.cta-underline:hover {
+  text-shadow: 0 0 40px rgba(249, 115, 22, 0.4), 0 0 80px rgba(249, 115, 22, 0.2);
+}
+
+/* ═══════ TIMELINE DOT GLOW ═══════ */
+.timeline-dot {
+  transition: background-color 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
+}
+.timeline-dot.active {
+  background-color: #f97316 !important;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.8), 0 0 24px rgba(249, 115, 22, 0.4);
+  transform: scale(1.3);
+}
+
+/* ═══════ SKILL BADGE HOVER ═══════ */
+.skill-badge {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.skill-badge:hover {
+  background-color: rgba(249, 115, 22, 0.15) !important;
+  border-color: rgba(249, 115, 22, 0.5) !important;
+  color: #fb923c !important;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.2);
+}
+
+/* ═══════ FOOTER EYE IDLE DRIFT ═══════ */
+@keyframes eyeIdleDrift {
+  0% { transform: translate(0px, 0px); }
+  15% { transform: translate(6px, -3px); }
+  30% { transform: translate(-4px, 2px); }
+  45% { transform: translate(3px, 5px); }
+  60% { transform: translate(-6px, -2px); }
+  75% { transform: translate(4px, -4px); }
+  90% { transform: translate(-2px, 3px); }
+  100% { transform: translate(0px, 0px); }
+}
+.eye-idle .pupil {
+  animation: eyeIdleDrift 6s ease-in-out infinite;
+}
+
+/* ═══════ ABOUT CARD ACCENT GLOW ═══════ */
+.card-glow-frontend:hover {
+  box-shadow: 0 0 30px rgba(249, 115, 22, 0.15), inset 0 0 30px rgba(249, 115, 22, 0.05);
+  border-color: rgba(249, 115, 22, 0.3) !important;
+}
+.card-glow-backend:hover {
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.15), inset 0 0 30px rgba(56, 189, 248, 0.05);
+  border-color: rgba(56, 189, 248, 0.3) !important;
+}
+.card-glow-cms:hover {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.15), inset 0 0 30px rgba(168, 85, 247, 0.05);
+  border-color: rgba(168, 85, 247, 0.3) !important;
+}
+
+/* ═══════ PROJECT INDEX NUMBER ═══════ */
+.project-index-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.875rem;
+  color: rgba(161, 161, 170, 0.4);
+  letter-spacing: 0.1em;
+  transition: color 0.5s ease;
+  min-width: 2.5rem;
+}
+.group:hover .project-index-num {
+  color: #f97316;
+}
+
+/* ═══════ LOADER ═══════ */
+.loader-label {
+  font-family: 'Space Mono', 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.6;
+}
+
+/* Smooth bar fill override — pairs with Framer motion scaleX */
+.loader-progress-fill {
+  transform-origin: left center;
+  will-change: transform;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Loader shimmer sweep on progress bar */
+@keyframes loaderShimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
