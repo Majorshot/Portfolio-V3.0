@@ -123,7 +123,7 @@ export default function Stepper({
               {currentStep !== 1 && (
                 <button
                   onClick={handleBack}
-                  className={`duration-300 font-mono text-xs md:text-sm tracking-widest uppercase transition ${
+                  className={`cursor-target duration-300 font-mono text-xs md:text-sm tracking-widest uppercase transition ${
                     currentStep === 1
                       ? 'pointer-events-none opacity-50 text-zinc-600'
                       : 'text-zinc-400 hover:text-orange-500'
@@ -135,7 +135,7 @@ export default function Stepper({
               )}
               <button
                 onClick={handleNext}
-                className="duration-300 flex items-center justify-center bg-orange-500 py-2.5 md:py-3 px-6 md:px-8 font-bold tracking-widest text-black uppercase transition hover:bg-orange-600 active:bg-orange-700 text-sm md:text-base"
+                className="cursor-target duration-300 flex items-center justify-center bg-orange-500 py-2.5 md:py-3 px-6 md:px-8 font-bold tracking-widest text-black uppercase transition hover:bg-orange-600 active:bg-orange-700 text-sm md:text-base"
                 {...nextButtonProps}
               >
                 {isLastStep ? 'SUBMIT' : nextButtonText}
@@ -222,7 +222,7 @@ function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators }
   return (
     <motion.div
       onClick={handleClick}
-      className={`relative outline-none focus:outline-none ${disableStepIndicators ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
+      className={`cursor-target relative outline-none focus:outline-none ${disableStepIndicators ? 'pointer-events-none opacity-50' : 'cursor-pointer'}`}
       animate={status}
       initial={false}
     >

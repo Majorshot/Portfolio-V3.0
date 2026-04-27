@@ -133,7 +133,7 @@ export const Contact = () => {
                 {!isSubmitting && (
                    <button 
                      onClick={() => setResult("")}
-                     className="mt-12 border border-zinc-300 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-500 dark:hover:border-zinc-600 px-6 py-2 font-mono text-xs tracking-widest uppercase transition-colors"
+                     className="cursor-target mt-12 border border-zinc-300 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-500 dark:hover:border-zinc-600 px-6 py-2 font-mono text-xs tracking-widest uppercase transition-colors"
                    >
                      Reset Comms
                    </button>

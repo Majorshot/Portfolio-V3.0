@@ -11,7 +11,6 @@ import { FiArrowRight } from "react-icons/fi";
 import React, { useRef } from "react";
 import presciptoImg from "../assets/prescipto.png";
 import pappaspizzaImg from "../assets/pappaspizza.png";
-import todoImg from "../assets/todo.png";
 import gorentalImg from "../assets/gorental.png";
 import ashbourneImg from "../assets/ashbourne.png";
 import nexusImg from "../assets/nexus.png";
@@ -192,12 +191,6 @@ export const HoverImageLinks = () => {
           subheading="Craving? order some pizzzzaaa"
           imgSrc={pappaspizzaImg}
           href="https://pappaspizza.netlify.app/"
-        />
-        <Link
-          heading="ToDoApp"
-          subheading="#Justdoeit"
-          imgSrc={todoImg}
-          href="https://todoappsted.netlify.app/"
         />
         <Link
           heading="GoRental"

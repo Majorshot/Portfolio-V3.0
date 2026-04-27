@@ -140,7 +140,7 @@ export const Hero = ({ introFinished, theme, introVideoRef, bgVideoRef, heroText
               href="/resume.html" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="group relative inline-flex items-center justify-center px-8 py-3 md:py-4 text-xs md:text-sm font-bold font-mono tracking-[0.2em] text-zinc-900 dark:text-white border border-zinc-900 dark:border-white overflow-hidden transition-all duration-300 hover:border-orange-500 dark:hover:border-orange-500 w-fit"
+              className="cursor-target group relative inline-flex items-center justify-center px-8 py-3 md:py-4 text-xs md:text-sm font-bold font-mono tracking-[0.2em] text-zinc-900 dark:text-white border border-zinc-900 dark:border-white overflow-hidden transition-all duration-300 hover:border-orange-500 dark:hover:border-orange-500 w-fit"
             >
               <span className="absolute inset-0 w-full h-full -translate-x-full bg-orange-500 group-hover:translate-x-0 transition-transform duration-500 ease-[cubic-bezier(0.85,0,0.15,1)]"></span>
               <span className="relative flex items-center gap-3 group-hover:text-white transition-colors duration-500">
