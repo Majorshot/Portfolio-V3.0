@@ -105,7 +105,9 @@ export const Hero = ({ introFinished, theme, introVideoRef, bgVideoRef, heroText
           <h1 ref={leftParallaxRef} className="text-[11vw] sm:text-[11vw] md:text-[12vw] leading-[0.75] tracking-tight uppercase self-start whitespace-nowrap overflow-visible" style={{ fontFamily: '"Syne", sans-serif', fontWeight: 800 }}>
             {renderStaggeredText("MIDHUN", 800, theme === 'dark' ? 'text-texture-dark' : 'text-texture-light')}
           </h1>
-          <h1 ref={rightParallaxRef} className="text-[11vw] sm:text-[11vw] md:text-[12vw] leading-[0.75] tracking-tight uppercase self-end -mt-2 md:-mt-8 whitespace-nowrap overflow-visible" style={{ fontFamily: '"Syne", sans-serif', fontWeight: 800 }}>
+          
+          {/* NUDGE APPLIED HERE: translate-x-4 added to shift it slightly right on mobile */}
+          <h1 ref={rightParallaxRef} className="text-[11vw] sm:text-[11vw] md:text-[12vw] leading-[0.75] tracking-tight uppercase self-end -mt-2 md:-mt-8 whitespace-nowrap overflow-visible -mr-8 md:mr-0" style={{ fontFamily: '"Syne", sans-serif', fontWeight: 800 }}>
             {renderStaggeredText("MOHAN", 1200, theme === 'dark' ? 'text-texture-dark' : 'text-texture-light')}
           </h1>
         </div>

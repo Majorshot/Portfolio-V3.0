@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Midhun Mohan - Resume</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
@@ -20,6 +20,12 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
         body {
             font-family: 'Outfit', sans-serif;
             background-color: #f4f4f5;
@@ -35,6 +41,7 @@
             padding: 60px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             border-top: 8px solid var(--accent);
+            width: 100%;
         }
 
         header {
@@ -73,15 +80,19 @@
         .header-right a {
             color: var(--text-muted);
             text-decoration: none;
+            font-weight: bold;
         }
 
-        .header-right a:hover {
-            color: var(--accent);
+        .header-right a:hover { color: var(--accent); }
+
+        .header-links {
+            margin-top: 4px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
         }
 
-        section {
-            margin-bottom: 35px;
-        }
+        section { margin-bottom: 35px; }
 
         h2 {
             font-size: 14px;
@@ -94,11 +105,7 @@
             font-weight: 800;
         }
 
-        .summary {
-            font-size: 16px;
-            color: var(--text-main);
-            margin-bottom: 20px;
-        }
+        .summary { font-size: 16px; color: var(--text-main); margin-bottom: 20px; }
 
         .grid {
             display: grid;
@@ -106,123 +113,60 @@
             gap: 20px;
         }
 
-        .skill-category h3 {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
+        .skill-category h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+        .skill-category p { font-size: 14px; color: var(--text-muted); }
 
-        .skill-category p {
-            font-size: 14px;
-            color: var(--text-muted);
-        }
+        .experience-item, .project-detail-item { margin-bottom: 25px; }
 
-        .experience-item {
-            margin-bottom: 25px;
-        }
-
-        .exp-header {
+        .exp-header, .proj-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             margin-bottom: 6px;
         }
 
-        .exp-header h3 {
-            font-size: 18px;
-            font-weight: 700;
-        }
+        .exp-header h3, .proj-header h3 { font-size: 18px; font-weight: 700; }
+        .exp-header span, .proj-header a { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--accent); text-decoration: none; }
 
-        .exp-header span {
-            font-family: 'Space Mono', monospace;
-            font-size: 12px;
-            color: var(--text-muted);
-        }
+        .exp-role { font-weight: 600; color: var(--text-main); font-size: 15px; margin-bottom: 8px; display: block; }
 
-        .exp-role {
-            font-weight: 600;
-            color: var(--text-main);
-            font-size: 15px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .experience-item ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .experience-item li {
+        ul { list-style: none; padding-left: 0; }
+        li {
             font-size: 14px;
             color: var(--text-muted);
             margin-bottom: 4px;
             position: relative;
             padding-left: 15px;
         }
-
-        .experience-item li::before {
+        li::before {
             content: "•";
             position: absolute;
             left: 0;
             color: var(--accent);
         }
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
+        .education-item { margin-bottom: 15px; }
+        .education-item h3 { font-size: 16px; font-weight: 700; }
+        .education-item p { font-size: 14px; color: var(--text-muted); }
 
-        .project-item {
-            padding: 15px;
-            background: #fafafa;
-            border-radius: 4px;
-        }
-
-        .project-item h3 {
-            font-size: 15px;
-            margin-bottom: 5px;
-        }
-
-        .project-item p {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .education-item {
-            margin-bottom: 15px;
-        }
-
-        .education-item h3 {
-            font-size: 16px;
-            font-weight: 700;
-        }
-
-        .education-item p {
-            font-size: 14px;
-            color: var(--text-muted);
+        @media screen and (max-width: 768px) {
+            body { padding: 15px 10px; }
+            .resume-container { padding: 30px 15px; box-shadow: none; }
+            header { flex-direction: column; align-items: center; text-align: center; gap: 15px; }
+            .header-left h1 { font-size: 32px; }
+            .header-right { text-align: center; width: 100%; }
+            .header-links { justify-content: center; }
+            .grid { grid-template-columns: 1fr; }
+            .exp-header, .proj-header { flex-direction: column; align-items: flex-start; gap: 2px; }
         }
 
         @media print {
-            body {
-                padding: 0;
-                background-color: white;
-            }
-            .resume-container {
-                box-shadow: none;
-                margin: 0;
-                max-width: 100%;
-            }
-            .no-print {
-                display: none;
-            }
+            body { padding: 0; background-color: white; }
+            .resume-container { box-shadow: none; margin: 0; max-width: 100%; }
+            .no-print { display: none; }
         }
 
-        .no-print {
-            text-align: center;
-            margin-top: 20px;
-        }
-
+        .no-print { text-align: center; margin-top: 20px; padding-bottom: 40px; }
         .btn-print {
             padding: 10px 20px;
             background: var(--primary);
@@ -232,11 +176,6 @@
             cursor: pointer;
             font-family: 'Space Mono', monospace;
             font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .btn-print:hover {
-            background: var(--accent);
         }
     </style>
 </head>
@@ -250,8 +189,11 @@
             <div class="header-right">
                 <p>midhunmohankzhyw@gmail.com</p>
                 <p>+91 999 58 55 774</p>
-                <p><a href="https://linkedin.com/in/midhunmohan-dev/">linkedin.com/in/midhunmohan-dev/</a></p>
-                <p><a href="https://github.com/Majorshot">github.com/Majorshot</a></p>
+                <div class="header-links">
+                    <a href="https://midhun-mohan.netlify.app/" target="_blank">Portfolio</a> | 
+                    <a href="https://linkedin.com/in/midhunmohan-dev/" target="_blank">LinkedIn</a> | 
+                    <a href="https://github.com/Majorshot" target="_blank">GitHub</a>
+                </div>
             </div>
         </header>
 
@@ -340,51 +282,76 @@
         </section>
 
         <section>
-            <h2>Featured Work</h2>
-            <div class="projects-grid">
-                <div class="project-item">
-                    <h3><a href="https://centurionstaunchnexus.co.uk/" target="_blank">Centurion Staunch Nexus</a></h3>
-                    <p>Event Management & Award Platform</p>
+            <h2>Featured Projects</h2>
+            
+            <div class="project-detail-item">
+                <div class="proj-header">
+                    <h3>Centurion Staunch Nexus</h3>
+                    <a href="https://centurionstaunchnexus.co.uk/" target="_blank">Live Link ↗</a>
                 </div>
-                <div class="project-item">
-                    <h3><a href="https://centurionstaunchashbourne.co.uk/" target="_blank">Centurion Staunch Ashbourne</a></h3>
-                    <p>Healthcare & Physiotherapy Portal</p>
+                <ul>
+                    <li>Developed the comprehensive information architecture and digital platform for enterprise-scale event management.</li>
+                    <li>Engineered responsive navigation systems, including custom navbar design and footer implementations.</li>
+                </ul>
+            </div>
+
+            <div class="project-detail-item">
+                <div class="proj-header">
+                    <h3>Centurion Staunch Ashbourne</h3>
+                    <a href="https://centurionstaunchashbourne.co.uk/" target="_blank">Live Link ↗</a>
                 </div>
-                <div class="project-item">
-                    <h3><a href="https://garlandlodge.org/" target="_blank">Garland Lodge</a></h3>
-                    <p>Residential Care Home Website</p>
+                <ul>
+                    <li>Architected a healthcare and physiotherapy portal focused on intuitive user flows and patient accessibility.</li>
+                    <li>Integrated highly functional booking forms to streamline patient appointments and backend management.</li>
+                </ul>
+            </div>
+
+            <div class="project-detail-item">
+                <div class="proj-header">
+                    <h3>Garland Lodge</h3>
+                    <a href="https://garlandlodge.org/" target="_blank">Live Link ↗</a>
                 </div>
-                <div class="project-item">
-                    <h3><a href="https://gorentalcom.netlify.app/" target="_blank">GoRental</a></h3>
-                    <p>Car Rental Architecture</p>
+                <ul>
+                    <li>Developed a dedicated residential care home website with a focus on user-friendly navigation and clear service information.</li>
+                    <li>Implemented custom UI components, including dynamic navbars and secure functional inquiry forms.</li>
+                </ul>
+            </div>
+
+            <div class="project-detail-item">
+                <div class="proj-header">
+                    <h3>GoRental</h3>
+                    <a href="https://gorentalcom.netlify.app/" target="_blank">Live Link ↗</a>
                 </div>
-                <div class="project-item">
-                    <h3><a href="https://prescipto-qbg7.onrender.com/" target="_blank">Precripto</a></h3>
-                    <p>Doctors Appointment System</p>
+                <ul>
+                    <li>Engineered a full-stack MERN car rental platform featuring dynamic sorting by location, pickup, and drop-off times.</li>
+                    <li>Implemented a user-facing feature allowing customers to list their own vehicles, creating a secondary revenue stream.</li>
+                    <li>Developed a comprehensive admin dashboard to manage bookings, including confirmations and cancellations.</li>
+                </ul>
+            </div>
+
+            <div class="project-detail-item">
+                <div class="proj-header">
+                    <h3>Prescripto</h3>
+                    <a href="https://prescipto-qbg7.onrender.com/" target="_blank">Live Link ↗</a>
                 </div>
-                <div class="project-item">
-                    <h3><a href="https://pappaspizza.netlify.app/" target="_blank">PappasPizza</a></h3>
-                    <p>Order Delivery Platform</p>
+                <ul>
+                    <li>Built a comprehensive doctor appointment booking system using the MERN stack, featuring role-based access for patients, doctors, and administrators.</li>
+                    <li>Designed a department-based categorization system to enhance appointment management and organization.</li>
+                </ul>
+            </div>
+
+            <div class="project-detail-item">
+                <div class="proj-header">
+                    <h3>Pappas Pizza</h3>
+                    <a href="https://pappaspizza.netlify.app/" target="_blank">Live Link ↗</a>
                 </div>
-                <div class="project-item">
-                    <h3><a href="https://todoappsted.netlify.app/" target="_blank">ToDoApp</a></h3>
-                    <p>Task Management Logic</p>
-                </div>
+                <ul>
+                    <li>Developed a modern pizza ordering platform with real-time order tracking to enhance the customer experience.</li>
+                    <li>Implemented a dynamic menu management system, allowing for easy updates and modifications by staff.</li>
+                </ul>
             </div>
         </section>
     </div>
-
-    <style>
-        .projects-grid a {
-            color: var(--primary);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .projects-grid a:hover {
-            color: var(--accent);
-            text-decoration: underline;
-        }
-    </style>
 
     <div class="no-print">
         <button class="btn-print" onclick="window.print()">SAVE AS PDF</button>
