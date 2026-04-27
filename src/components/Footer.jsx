@@ -10,14 +10,13 @@ export const Footer = () => {
   const idleTimerRef = useRef(null);
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
+    let rafId = null;
+    let latestX = 0;
+    let latestY = 0;
 
-      // Reset idle timer on every mouse move
-      setIsIdle(false);
-      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-      idleTimerRef.current = setTimeout(() => setIsIdle(true), 2000);
+    const updateEyes = () => {
+      const mouseX = latestX;
+      const mouseY = latestY;
 
       const updateEye = (eye) => {
         if (!eye) return;
@@ -44,12 +43,29 @@ export const Footer = () => {
 
       updateEye(leftEyeRef.current);
       updateEye(rightEyeRef.current);
+      rafId = null;
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    const handleMouseMove = (e) => {
+      latestX = e.clientX;
+      latestY = e.clientY;
+
+      // Reset idle timer on every mouse move
+      setIsIdle(false);
+      if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+      idleTimerRef.current = setTimeout(() => setIsIdle(true), 2000);
+
+      // Batch DOM reads/writes into a single rAF
+      if (!rafId) {
+        rafId = requestAnimationFrame(updateEyes);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 

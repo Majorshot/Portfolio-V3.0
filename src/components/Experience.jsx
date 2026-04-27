@@ -64,16 +64,11 @@ export const Experience = () => {
         });
       });
 
-      // Recalculate robustly on mobile after variable layout text finishes mapping
-      const refreshMetrics = () => ScrollTrigger.refresh();
-      const st1 = setTimeout(refreshMetrics, 100);
-      const st2 = setTimeout(refreshMetrics, 500);
-      const st3 = setTimeout(refreshMetrics, 1500);
+      // Single delayed refresh after layout settles
+      const refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 500);
 
       return () => {
-        clearTimeout(st1);
-        clearTimeout(st2);
-        clearTimeout(st3);
+        clearTimeout(refreshTimer);
       };
     }, sectionRef);
 
@@ -84,7 +79,7 @@ export const Experience = () => {
     <section 
       id="experience" 
       ref={sectionRef} 
-      className="py-20 md:py-32 px-6 md:px-12 lg:px-24 relative z-10 bg-zinc-50/95 dark:bg-zinc-950/95 backdrop-blur-md"
+      className="py-20 md:py-32 px-6 md:px-12 lg:px-24 relative z-10 bg-zinc-50/95 dark:bg-zinc-950/95 md:backdrop-blur-md"
     >
       <div className="max-w-7xl mx-auto flex flex-col xl:flex-row gap-12 lg:gap-32 relative">
         

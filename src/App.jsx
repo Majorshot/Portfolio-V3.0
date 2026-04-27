@@ -67,6 +67,8 @@ export default function App() {
   const analyserRef = useRef(null);
   const reqAnimFrameRef = useRef(null);
 
+  const heroElRef = useRef(null);
+
   const setupWebAudio = () => {
     if (!audioContextRef.current && audioRef.current) {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -81,18 +83,21 @@ export default function App() {
       source.connect(analyser);
       analyser.connect(ctx.destination);
       
+      // Cache the hero element reference once instead of querying every frame
+      heroElRef.current = document.querySelector('.audio-reactive-hero');
+      const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
       const updateAudioData = () => {
         if (!analyserRef.current) return;
-        const dataArray = new Uint8Array(analyserRef.current.frequencyBinCount);
         analyserRef.current.getByteFrequencyData(dataArray);
 
         const bass = dataArray.slice(0, 5).reduce((a, b) => a + b) / 5;
         const treble = dataArray.slice(30, 60).reduce((a, b) => a + b) / 30;
 
-        const heroEl = document.querySelector('.audio-reactive-hero');
-        if (heroEl) {
-          heroEl.style.setProperty('--bass-hit', (bass / 255).toFixed(3));
-          heroEl.style.setProperty('--treble-hit', (treble / 255).toFixed(3));
+        const el = heroElRef.current;
+        if (el) {
+          el.style.setProperty('--bass-hit', (bass / 255).toFixed(3));
+          el.style.setProperty('--treble-hit', (treble / 255).toFixed(3));
         }
 
         reqAnimFrameRef.current = requestAnimationFrame(updateAudioData);
@@ -179,7 +184,7 @@ export default function App() {
   };
 
   return (
-    <ReactLenis root options={{ lerp: 0.08, duration: 1.5, smoothTouch: false }}>
+    <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothTouch: false }}>
       <div className={theme}>
       <TargetCursor spinDuration={2} hideDefaultCursor parallaxOn={false} hoverDuration={0.2} />
       <div className="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 min-h-screen w-full transition-colors duration-700 font-sans relative selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-900 overflow-x-clip">

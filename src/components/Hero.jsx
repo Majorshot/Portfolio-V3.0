@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import DecryptedText from '../animations/DecryptedText';
+import { useIsMobile } from '../animations/useIsMobile';
 
 export const Hero = ({ introFinished, theme, introVideoRef, bgVideoRef, heroTextRef, handleIntroEnded, handleSkipIntro, introVideoUrl, bgVideoUrl }) => {
+  const isMobile = useIsMobile();
   const [time, setTime] = useState('');
   const [sysHex, setSysHex] = useState('0x000000');
 
@@ -123,7 +125,7 @@ export const Hero = ({ introFinished, theme, introVideoRef, bgVideoRef, heroText
                   sequential={true}
                   useOriginalCharsOnly={false}
                   className="opacity-100"
-                  encryptedClassName="opacity-60 blur-[1px]"
+                  encryptedClassName={isMobile ? 'opacity-60' : 'opacity-60 blur-[1px]'}
                 />
               ) : (
                 <span className="opacity-0">Building robust digital architecture and immersive web experiences. From complex backend systems to pixel-perfect frontends.</span>

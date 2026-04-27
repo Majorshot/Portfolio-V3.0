@@ -192,16 +192,34 @@ const Grainient = ({
     setSize();
 
     let raf = 0;
+    let isVisible = false;
     const t0 = performance.now();
+
     const loop = t => {
+      if (!isVisible) return;
       program.uniforms.iTime.value = (t - t0) * 0.001;
       renderer.render({ scene: mesh });
       raf = requestAnimationFrame(loop);
     };
-    raf = requestAnimationFrame(loop);
+
+    // Only run the shader when the container is actually in the viewport
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(loop);
+        } else {
+          cancelAnimationFrame(raf);
+        }
+      },
+      { rootMargin: '200px' } // start slightly before entering viewport
+    );
+    io.observe(container);
 
     return () => {
       cancelAnimationFrame(raf);
+      io.disconnect();
       ro.disconnect();
       try {
         container.removeChild(canvas);

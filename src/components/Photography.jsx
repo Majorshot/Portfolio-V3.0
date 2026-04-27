@@ -39,6 +39,7 @@ export const Photography = () => {
   const stripRef = useRef(null);
   const progressRef = useRef(null);
   const rafRef = useRef(null);
+  const isNearViewportRef = useRef(false);
 
   const updateScroll = useCallback(() => {
     const section = sectionRef.current;
@@ -46,18 +47,15 @@ export const Photography = () => {
 
     const rect = section.getBoundingClientRect();
     const sectionHeight = section.offsetHeight - window.innerHeight;
-    // How far we've scrolled through the section (0 → 1)
     const rawProgress = clamp(-rect.top / sectionHeight, 0, 1);
 
-    // --- Title: fully visible 0–15%, fades out 15–20% ---
     if (titleRef.current) {
       const titleOpacity = mapRange(rawProgress, 0.15, 0.2, 1, 0);
-      const titleX = mapRange(rawProgress, 0.15, 0.2, 0, -100); // vw
+      const titleX = mapRange(rawProgress, 0.15, 0.2, 0, -100);
       titleRef.current.style.opacity = titleOpacity;
       titleRef.current.style.transform = `translate3d(${titleX}vw, 0, 0)`;
     }
 
-    // --- Filmstrip: slides left from 15% → 100% ---
     if (stripRef.current) {
       const stripWidth = stripRef.current.scrollWidth;
       const viewportW = window.innerWidth;
@@ -67,17 +65,39 @@ export const Photography = () => {
       stripRef.current.style.transform = `translate3d(${translateX}px, 0, 0)`;
     }
 
-    // --- Progress bar ---
     if (progressRef.current) {
       progressRef.current.style.transform = `scaleX(${rawProgress})`;
     }
-
-    rafRef.current = requestAnimationFrame(updateScroll);
   }, []);
 
   useEffect(() => {
-    rafRef.current = requestAnimationFrame(updateScroll);
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let ticking = false;
+    const onScroll = () => {
+      if (!isNearViewportRef.current || ticking) return;
+      ticking = true;
+      rafRef.current = requestAnimationFrame(() => {
+        updateScroll();
+        ticking = false;
+      });
+    };
+
+    // Only activate scroll handler when section is near viewport
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        isNearViewportRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) updateScroll();
+      },
+      { rootMargin: '200px' }
+    );
+    io.observe(section);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
+      window.removeEventListener('scroll', onScroll);
+      io.disconnect();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [updateScroll]);

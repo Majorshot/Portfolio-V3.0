@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState, useMemo } from 'react';
+import { useIsMobile } from './useIsMobile';
 
 const buildKeyframes = (from, steps) => {
   const keys = new Set([...Object.keys(from), ...steps.flatMap(s => Object.keys(s))]);
@@ -26,6 +27,7 @@ const BlurText = ({
   stepDuration = 0.35,
   tag = 'p'
 }) => {
+  const isMobile = useIsMobile();
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
   const ref = useRef(null);
@@ -47,22 +49,24 @@ const BlurText = ({
 
   const defaultFrom = useMemo(
     () =>
-      direction === 'top' ? { filter: 'blur(10px)', opacity: 0, y: -50 } : 
-      direction === 'bottom' ? { filter: 'blur(10px)', opacity: 0, y: 50 } :
-      { filter: 'blur(10px)', opacity: 0, y: 50 },
-    [direction]
+      direction === 'top'
+        ? { ...(isMobile ? {} : { filter: 'blur(10px)' }), opacity: 0, y: -50 }
+        : direction === 'bottom'
+          ? { ...(isMobile ? {} : { filter: 'blur(10px)' }), opacity: 0, y: 50 }
+          : { ...(isMobile ? {} : { filter: 'blur(10px)' }), opacity: 0, y: 50 },
+    [direction, isMobile]
   );
 
   const defaultTo = useMemo(
     () => [
       {
-        filter: 'blur(5px)',
+        ...(isMobile ? {} : { filter: 'blur(5px)' }),
         opacity: 0.5,
         y: direction === 'top' ? 5 : direction === 'bottom' ? -5 : 0
       },
-      { filter: 'blur(0px)', opacity: 1, y: 0 }
+      { ...(isMobile ? {} : { filter: 'blur(0px)' }), opacity: 1, y: 0 }
     ],
-    [direction]
+    [direction, isMobile]
   );
 
   const fromSnapshot = animationFrom ?? defaultFrom;

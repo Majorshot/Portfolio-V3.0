@@ -1,6 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { getIsMobile } from './useIsMobile';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,7 +66,7 @@ const ScrollReveal = ({
       0
     );
 
-    if (enableBlur) {
+    if (enableBlur && !getIsMobile()) {
       tl.fromTo(
         wordElements,
         { filter: `blur(${blurStrength}px)` },

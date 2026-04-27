@@ -1,0 +1,23 @@
+import { useState, useEffect } from 'react';
+
+const MOBILE_BREAKPOINT = 768;
+
+export function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    const handler = (e) => setIsMobile(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, []);
+
+  return isMobile;
+}
+
+/** Non-hook version for components that can't use hooks inline */
+export function getIsMobile() {
+  return typeof window !== 'undefined' && window.innerWidth < MOBILE_BREAKPOINT;
+}

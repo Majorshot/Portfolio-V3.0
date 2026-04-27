@@ -70,7 +70,21 @@ export const ScrollVelocity = ({
     );
 
     const copyRef = useRef(null);
+    const containerRef = useRef(null);
+    const isVisibleRef = useRef(false);
     const copyWidth = useElementWidth(copyRef);
+
+    // Gate animation to only run when visible
+    useLayoutEffect(() => {
+      const el = containerRef.current;
+      if (!el) return;
+      const io = new IntersectionObserver(
+        ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+        { rootMargin: '100px' }
+      );
+      io.observe(el);
+      return () => io.disconnect();
+    }, []);
 
     function wrap(min, max, v) {
       const range = max - min;
@@ -85,6 +99,8 @@ export const ScrollVelocity = ({
 
     const directionFactor = useRef(1);
     useAnimationFrame((t, delta) => {
+      if (!isVisibleRef.current) return;
+
       let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
       if (velocityFactor.get() < 0) {
@@ -107,7 +123,7 @@ export const ScrollVelocity = ({
     }
 
     return (
-      <div className={`${parallaxClassName} relative overflow-hidden`} style={parallaxStyle}>
+      <div ref={containerRef} className={`${parallaxClassName} relative overflow-hidden`} style={parallaxStyle}>
         <motion.div
           className={`${scrollerClassName} flex whitespace-nowrap text-center font-sans text-4xl font-bold tracking-[-0.02em] md:text-[5rem] md:leading-[5rem]`}
           style={{ x, willChange: 'transform', ...scrollerStyle }}
