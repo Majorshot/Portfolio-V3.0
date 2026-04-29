@@ -23,7 +23,6 @@ export const MediaPlayer = ({
       setDuration(audio.duration || 0);
     };
 
-    // Trigger immediately in case metadata is already loaded before listener attaches
     if (audio.readyState >= 1) {
       updateProgress();
     }
@@ -64,11 +63,11 @@ export const MediaPlayer = ({
       animate={{ opacity: 1, y: 0, scale: 1, backdropFilter: "blur(40px)", WebkitBackdropFilter: "blur(40px)" }}
       exit={{ opacity: 0, y: 15, scale: 0.95, backdropFilter: "blur(0px)", WebkitBackdropFilter: "blur(0px)" }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      className="w-72 sm:w-80 rounded-[2.5rem] overflow-hidden bg-zinc-800/80 md:bg-zinc-900/60 border border-white/10 shadow-2xl p-5 flex flex-col gap-5 relative z-50"
+      className="w-72 sm:w-80 rounded-[2.5rem] overflow-hidden bg-zinc-800/80 md:bg-zinc-900/60 border border-white/10 shadow-2xl p-3 sm:p-5 flex flex-col gap-2 sm:gap-5 relative z-50"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
       
-      {/* Album Art */}
+      {/* Album Art — untouched */}
       <div className="relative aspect-square w-full rounded-[2rem] overflow-hidden shadow-lg border border-white/5 bg-zinc-800">
         {currentTrack?.cover ? (
           <motion.img 
@@ -87,8 +86,8 @@ export const MediaPlayer = ({
         )}
       </div>
 
-      {/* Track Info */}
-      <div className="flex flex-col items-center text-center px-2">
+      {/* Track Info — reduced mt and px */}
+      <div className="flex flex-col items-center text-center px-1">
         <motion.h3 
           key={`title-${currentTrack?.title}`}
           initial={{ opacity: 0, y: 5 }}
@@ -102,14 +101,14 @@ export const MediaPlayer = ({
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-zinc-400 text-sm font-medium tracking-wide truncate w-full mt-1"
+          className="text-zinc-400 text-sm font-medium tracking-wide truncate w-full mt-0.5"
         >
           {currentTrack?.artist || 'Unknown Artist'}
         </motion.p>
       </div>
 
-      {/* Seeker */}
-      <div className="w-full flex flex-col gap-1.5 px-2 relative group">
+      {/* Seeker — reduced gap and mt */}
+      <div className="w-full flex flex-col gap-1 px-2 relative group">
         <div className="relative h-1.5 w-full bg-zinc-800 rounded-full overflow-hidden">
            <div 
              className="absolute top-0 left-0 h-full bg-white transition-all duration-100 rounded-full" 
@@ -124,14 +123,14 @@ export const MediaPlayer = ({
           onChange={handleSeek}
           className="absolute top-0 left-2 right-2 h-1.5 opacity-0 cursor-target w-[calc(100%-1rem)]"
         />
-        <div className="flex justify-between text-[11px] text-zinc-500 font-mono font-medium mt-1">
+        <div className="flex justify-between text-[11px] text-zinc-500 font-mono font-medium">
           <span>{formatTime(progress)}</span>
           <span>{formatTime(duration)}</span>
         </div>
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center justify-center gap-7 pb-2">
+      {/* Controls — removed pb-2, reduced gap */}
+      <div className="flex items-center justify-center gap-7">
         <button 
           onClick={prevTrack} 
           className="text-zinc-400 hover:text-white transition-colors cursor-target focus:outline-none hover:scale-110 active:scale-95 flex items-center justify-center"
@@ -140,7 +139,7 @@ export const MediaPlayer = ({
         </button>
         <button 
           onClick={togglePlay} 
-          className="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] cursor-target focus:outline-none"
+          className="w-14 h-14 sm:w-16 sm:h-16 bg-white text-black rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-[0_0_25px_rgba(255,255,255,0.2)] hover:shadow-[0_0_35px_rgba(255,255,255,0.4)] cursor-target focus:outline-none"
         >
           {isPlaying ? <Pause className="w-7 h-7 fill-current" /> : <Play className="w-7 h-7 fill-current ml-1" />}
         </button>
