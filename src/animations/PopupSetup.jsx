@@ -60,7 +60,7 @@ Solution:
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center p-0 sm:p-1 rounded-xl scale-[0.78] sm:scale-[0.85] origin-top">
+      <div className="flex flex-col items-center justify-center p-0 rounded-xl scale-[0.68] sm:scale-[0.75] origin-top">
         <MediaPlayer
           audioRef={audioRef}
           currentTrack={currentTrack}
